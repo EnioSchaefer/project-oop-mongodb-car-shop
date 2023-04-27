@@ -35,6 +35,12 @@ class CarService {
 
     return this.createCarDomain(carFound);
   }
+
+  public async updateCar(id: string, car: ICar): Promise<Car | null> {
+    const updatedCar = await this.model.updateCar(id, car);
+    
+    return this.createCarDomain(updatedCar);
+  }
 }
 
 export default CarService;
