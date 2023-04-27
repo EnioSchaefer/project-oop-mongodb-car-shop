@@ -1,7 +1,7 @@
 import ICar from '../Interfaces/ICar';
 
 class Car {
-  protected id: number | undefined;
+  protected id: string | undefined;
   protected model: string;
   protected year: number;
   protected color: string;
@@ -23,7 +23,7 @@ class Car {
     this.seatsQty = carData.seatsQty;
   }
 
-  protected getId(): number | undefined {
+  protected getId(): string | undefined {
     return this.id;
   }
 
