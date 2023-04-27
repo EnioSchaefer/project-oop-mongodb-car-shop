@@ -1,12 +1,12 @@
 import Car from '../Domains/Car';
 import ICar from '../Interfaces/ICar';
-import CarModel from '../Models/CarModel';
+import CarODM from '../Models/CarODM';
 
 class CarService {
-  private model: CarModel;
+  private model: CarODM;
 
   constructor() {
-    this.model = new CarModel();
+    this.model = new CarODM();
   }
 
   private createCarDomain(newCar: ICar | null): Car | null {
@@ -17,13 +17,13 @@ class CarService {
   }
 
   public async createCar(car: ICar): Promise<Car | null> {    
-    const newCar = await this.model.createCar(car);
+    const newCar = await this.model.createVehicle(car);
 
     return this.createCarDomain(newCar);
   }
 
   public async findAllCars(): Promise<(Car | null)[]> {
-    const allCars = await this.model.findAllCars();
+    const allCars = await this.model.findAllVehicles();
 
     const createdCars = allCars.map((car: ICar) => this.createCarDomain(car));
     
@@ -31,13 +31,13 @@ class CarService {
   }
 
   public async findCarById(id: string): Promise<Car | null> {
-    const carFound = await this.model.findCarById(id);
+    const carFound = await this.model.findVehicleById(id);
 
     return this.createCarDomain(carFound);
   }
 
   public async updateCar(id: string, car: ICar): Promise<Car | null> {
-    const updatedCar = await this.model.updateCar(id, car);
+    const updatedCar = await this.model.updateVehicle(id, car);
     
     return this.createCarDomain(updatedCar);
   }
