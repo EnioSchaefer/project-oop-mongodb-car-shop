@@ -16,5 +16,10 @@ carRoutes.put(
   ValidateId,
   (req, res, next) => new CarController(req, res, next).updateCar(),
 );
+carRoutes.delete(
+  '/:id',
+  ValidateId,
+  (req, res, next) => new CarController(req, res, next).deleteCar(),
+);
 
 export default carRoutes;

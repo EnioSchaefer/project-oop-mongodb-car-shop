@@ -26,6 +26,12 @@ abstract class AbstractODM<T> {
   public async updateVehicle(id: string, vehicle: T): Promise<T | null> {
     return this.model.findByIdAndUpdate(id, { ...vehicle } as UpdateQuery<T>, { new: true });
   }
+
+  public async deleteVehicle(id: string): Promise<number> {
+    const { deletedCount } = await this.model.deleteOne({ id });
+    
+    return deletedCount; 
+  }
 }
 
 export default AbstractODM;
