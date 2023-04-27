@@ -42,6 +42,12 @@ class MotorcycleService {
 
     return this.createMotorcycleDomain(updatedMotorcycle);
   }
+
+  public async deleteMotorcycle(id: string): Promise<number | null> {
+    const deletedMotorcycle = await this.model.deleteVehicle(id);
+
+    return deletedMotorcycle;
+  }
 }
 
 export default MotorcycleService;

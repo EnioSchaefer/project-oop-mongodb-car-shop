@@ -2,24 +2,24 @@ import { Router } from 'express';
 import CarController from '../Controllers/CarController';
 import ValidateId from '../Middlewares/ValidateId';
 
-const carRoutes = Router();
+const CarRoutes = Router();
 
-carRoutes.post('/', (req, res, next) => new CarController(req, res, next).createCar());
-carRoutes.get(
+CarRoutes.post('/', (req, res, next) => new CarController(req, res, next).createCar());
+CarRoutes.get(
   '/:id',
   ValidateId,
   (req, res, next) => new CarController(req, res, next).findCarById(),
 );
-carRoutes.get('/', (req, res, next) => new CarController(req, res, next).findAllCars());
-carRoutes.put(
+CarRoutes.get('/', (req, res, next) => new CarController(req, res, next).findAllCars());
+CarRoutes.put(
   '/:id',
   ValidateId,
   (req, res, next) => new CarController(req, res, next).updateCar(),
 );
-carRoutes.delete(
+CarRoutes.delete(
   '/:id',
   ValidateId,
   (req, res, next) => new CarController(req, res, next).deleteCar(),
 );
 
-export default carRoutes;
+export default CarRoutes;

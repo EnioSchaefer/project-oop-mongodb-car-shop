@@ -7,6 +7,7 @@ class MotorcycleController {
   private res: Response;
   private next: NextFunction;
   private service: MotorcycleService;
+  private notFound = 'Motorcycle not found';
 
   constructor(req: Request, res: Response, next: NextFunction) {
     this.req = req;
@@ -43,7 +44,7 @@ class MotorcycleController {
 
       const foundMotorcycle = await this.service.findMotorcycleById(id);
 
-      if (!foundMotorcycle) return this.res.status(404).json({ message: 'Motorcycle not found' });
+      if (!foundMotorcycle) return this.res.status(404).json({ message: this.notFound });
 
       return this.res.status(200).json(foundMotorcycle);
     } catch (error) {
@@ -58,11 +59,25 @@ class MotorcycleController {
 
       const updatedMotorcycle = await this.service.updateMotorcycle(id, motorcycle);
 
-      if (!updatedMotorcycle) return this.res.status(404).json({ message: 'Motorcycle not found' });
+      if (!updatedMotorcycle) return this.res.status(404).json({ message: this.notFound });
 
       return this.res.status(200).json(updatedMotorcycle);
     } catch (error) {
       return this.next(error);
+    }
+  }
+
+  public async deleteMotorcycle(): Promise<Response | void> {
+    try {
+      const { id } = this.req.params;
+
+      const deleted = await this.service.deleteMotorcycle(id);
+
+      if (!deleted) return this.res.status(404).json({ message: this.notFound });
+
+      return this.res.status(204).end();
+    } catch (error) {
+      return this.next();
     }
   }
 }

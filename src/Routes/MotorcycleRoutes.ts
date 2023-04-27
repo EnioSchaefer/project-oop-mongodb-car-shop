@@ -22,5 +22,10 @@ MotorcycleRoutes.put(
   ValidateId,
   (req, res, next) => new MotorcycleController(req, res, next).updateMotorcycle(),
 );
+MotorcycleRoutes.delete(
+  '/:id',
+  ValidateId,
+  (req, res, next) => new MotorcycleController(req, res, next).deleteMotorcycle(),
+);
 
 export default MotorcycleRoutes;
